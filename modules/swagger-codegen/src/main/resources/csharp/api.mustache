@@ -17,14 +17,14 @@ namespace {{package}} {
     /// </summary>
     {{#allParams}}/// <param name="{{paramName}}">{{description}}</param>{{/allParams}}
     /// <returns>{{#returnType}}{{{returnType}}}{{/returnType}}</returns>
-    {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}} {{nickname}} ({{#allParams}}{{{dataType}}} {{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});
+    {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}} {{nickname}}({{#allParams}}{{{dataType}}} {{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});
 
     /// <summary>
     /// {{summary}} {{notes}}
     /// </summary>
     {{#allParams}}/// <param name="{{paramName}}">{{description}}</param>{{/allParams}}
     /// <returns>{{#returnType}}{{{returnType}}}{{/returnType}}</returns>
-    {{#returnType}}Task<{{{returnType}}}>{{/returnType}}{{^returnType}}Task{{/returnType}} {{nickname}}Async ({{#allParams}}{{{dataType}}} {{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});
+    {{#returnType}}Task<{{{returnType}}}>{{/returnType}}{{^returnType}}Task{{/returnType}} {{nickname}}Async({{#allParams}}{{{dataType}}} {{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});
     {{/operation}}
   }
 
@@ -38,45 +38,15 @@ namespace {{package}} {
     /// </summary>
     /// <param name="apiClient"> an instance of ApiClient (optional)
     /// <returns></returns>
-    public {{classname}}(ApiClient apiClient = null) {
-      if (apiClient == null) { // use the default one in Configuration
-        this.apiClient = Configuration.apiClient; 
-      } else {
-        this.apiClient = apiClient;
-      }
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="{{classname}}"/> class.
-    /// </summary>
-    /// <returns></returns>
-    public {{classname}}(String basePath)
-    {
-      this.apiClient = new ApiClient(basePath);
-    }
-
-    /// <summary>
-    /// Sets the base path of the API client.
-    /// </summary>
-    /// <value>The base path</value>
-    public void SetBasePath(String basePath) {
-      this.apiClient.basePath = basePath;
-    }
-
-    /// <summary>
-    /// Gets the base path of the API client.
-    /// </summary>
-    /// <value>The base path</value>
-    public String GetBasePath(String basePath) {
-      return this.apiClient.basePath;
+    public {{classname}}(ApiClient apiClient) {
+        ApiClient = apiClient;
     }
 
     /// <summary>
     /// Gets or sets the API client.
     /// </summary>
     /// <value>The API client</value>
-    public ApiClient apiClient {get; set;}
-
+    public ApiClient ApiClient { get; private set; }
 
     {{#operation}}
     /// <summary>
@@ -84,7 +54,7 @@ namespace {{package}} {
     /// </summary>
     {{#allParams}}/// <param name="{{paramName}}">{{description}}</param>{{/allParams}}
     /// <returns>{{#returnType}}{{{returnType}}}{{/returnType}}</returns>
-    public {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}} {{nickname}} ({{#allParams}}{{{dataType}}} {{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) {
+    public {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}} {{nickname}}({{#allParams}}{{{dataType}}} {{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) {
 
       {{#allParams}}{{#required}}
       // verify the required parameter '{{paramName}}' is set
@@ -129,7 +99,7 @@ namespace {{package}} {
     /// </summary>
     {{#allParams}}/// <param name="{{paramName}}">{{description}}</param>{{/allParams}}
     /// <returns>{{#returnType}}{{{returnType}}}{{/returnType}}</returns>
-    public async {{#returnType}}Task<{{{returnType}}}>{{/returnType}}{{^returnType}}Task{{/returnType}} {{nickname}}Async ({{#allParams}}{{{dataType}}} {{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) {
+    public async {{#returnType}}Task<{{{returnType}}}>{{/returnType}}{{^returnType}}Task{{/returnType}} {{nickname}}Async({{#allParams}}{{{dataType}}} {{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) {
 
       {{#allParams}}{{#required}}
           // verify the required parameter '{{paramName}}' is set

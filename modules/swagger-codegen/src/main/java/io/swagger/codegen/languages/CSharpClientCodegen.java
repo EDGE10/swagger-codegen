@@ -138,7 +138,8 @@ public class CSharpClientCodegen extends DefaultCodegen implements CodegenConfig
     @Override
     public String toParamName(String name) {
         // should be the same as variable name
-        return toVarName(name);
+		String paramName = toVarName(name);
+        return paramName.substring(0,1).toLowerCase() + paramName.substring(1);
     }
 
     @Override
